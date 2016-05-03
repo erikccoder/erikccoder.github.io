@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2016 by anonymous (http://jsbin.com/yibokogiqo/11/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>erik encryption</title>
+</head>
+<body>
+ 
+<textarea name="" id="txt" cols="30" rows="10">text</textarea>
+
+<div>
+  password: <input id="pw" type="text" value="0000">
+</div>
+<div>
+  <button onclick="doEncrypt()">encrypt</button>
+  <button onclick="doDecrypt()">decrypt</button>
+</div>
+  
+<textarea name="" id="out" cols="30" rows="10"></textarea>
+
+  
+<script id="jsbin-javascript">
+var pw = "6679";
+var txt = "If you lose your Recovery Key and forget your password, you will not be able to access to your Apple ID. To learn more, visit https://appleid.apple.com/us.";
+
+var $ = function(_sel){
+  return document.querySelector(_sel);
+};
+
+
+function encrypt(txt, pw){
+  var out = "";
+  var code=0;
+  for(var i=0; i<txt.length; i++){
+    code = txt.charCodeAt(i) + pw.charCodeAt(i%pw.length);
+    out += String.fromCharCode(code);
+  }
+  return out;
+}
+
+function decrypt(txt, pw){
+  var out = "";
+  var code=0;
+  for(var i=0; i< txt.length; i++){
+    code = txt.charCodeAt(i) - pw.charCodeAt(i%pw.length);
+    out += String.fromCharCode(code);
+  }
+  return out;
+}
+
+function doEncrypt(){
+  var _txt = $("#txt");
+  var _pw = $("#pw");
+  var _out = $("#out");
+  
+  _out.value = encrypt(_txt.value, _pw.value);
+}
+
+function doDecrypt(){
+  var _txt = $("#txt");
+  var _pw = $("#pw");
+  var _out = $("#out");
+  
+  _out.value = decrypt(_txt.value, _pw.value);
+}
+
+
+</script>
+</body>
+</html>
