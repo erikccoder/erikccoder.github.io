@@ -42,7 +42,7 @@ function encrypt(txt, pw){
   var code=0;
   for(var i=0; i<txt.length; i++){
     code = txt.charCodeAt(i) + pw.charCodeAt(i%pw.length);
-    out += String.fromCharCode(code);
+    out += code.toString(16);
   }
   return out;
 }
@@ -50,8 +50,11 @@ function encrypt(txt, pw){
 function decrypt(txt, pw){
   var out = "";
   var code=0;
-  for(var i=0; i< txt.length; i++){
-    code = txt.charCodeAt(i) - pw.charCodeAt(i%pw.length);
+  
+  for(var i=0; i< txt.length; i+=2){
+	var hex = txt.substr(i,2);
+	console.log(hex);
+    code = parseInt(hex, 16) - pw.charCodeAt((i/2)%pw.length);
     out += String.fromCharCode(code);
   }
   return out;
