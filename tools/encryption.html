@@ -16,10 +16,10 @@ Released under the MIT license: http://jsbin.mit-license.org
 </head>
 <body>
  
-<textarea name="" id="txt" cols="30" rows="10">text</textarea>
+<textarea name="" id="txt" cols="30" rows="10"></textarea>
 
 <div>
-  password: <input id="pw" type="text" value="0000">
+  password: <input id="pw" type="text" value="">
 </div>
 <div>
   <button onclick="doEncrypt()">encrypt</button>
@@ -30,8 +30,7 @@ Released under the MIT license: http://jsbin.mit-license.org
 
   
 <script id="jsbin-javascript">
-var pw = "6679";
-var txt = "If you lose your Recovery Key and forget your password, you will not be able to access to your Apple ID. To learn more, visit https://appleid.apple.com/us.";
+var msg = "Please input something!";
 
 var $ = function(_sel){
   return document.querySelector(_sel);
@@ -63,7 +62,12 @@ function doEncrypt(){
   var _pw = $("#pw");
   var _out = $("#out");
   
-  _out.value = encrypt(_txt.value, _pw.value);
+  if(_txt.value.length == 0 || _pw .value.length == 0){
+	_out.value = msg;
+  }
+  else {
+	_out.value = encrypt(_txt.value, _pw.value);
+  }
 }
 
 function doDecrypt(){
@@ -71,7 +75,12 @@ function doDecrypt(){
   var _pw = $("#pw");
   var _out = $("#out");
   
-  _out.value = decrypt(_txt.value, _pw.value);
+  if(_txt.value.length == 0 || _pw .value.length == 0){
+	_out.value = msg;
+  }
+  else {
+	_out.value = decrypt(_txt.value, _pw.value);
+  }
 }
 
 
