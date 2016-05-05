@@ -13,21 +13,47 @@ Released under the MIT license: http://jsbin.mit-license.org
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>erik encryption</title>
+  <style>
+	.root {
+	    max-width: 768px;
+	    margin: 0 auto;
+	}
+		
+	textarea {
+	    width: 100%;
+	    min-width: 384px;
+	}
+	
+	input#pw {
+	    margin: 20px;
+	}
+	
+	button {
+	    width: 45%;
+	    margin: 0 1em 2em 1em;
+	}
+	
+	.buttons {
+	    text-align: center;
+	}
+	
+  </style>
 </head>
 <body>
- 
-<textarea name="" id="txt" cols="30" rows="10"></textarea>
+ <div class="root">
+	<textarea name="" id="txt" cols="30" rows="10"></textarea>
+	
+	<div>
+	  password: <input id="pw" type="text" value="">
+	</div>
+	<div class="buttons">
+	  <button onclick="doEncrypt()">encrypt</button>
+	  <button onclick="doDecrypt()">decrypt</button>
+	</div>
+	  
+	<textarea name="" id="out" cols="30" rows="10"></textarea>
 
-<div>
-  password: <input id="pw" type="text" value="">
 </div>
-<div>
-  <button onclick="doEncrypt()">encrypt</button>
-  <button onclick="doDecrypt()">decrypt</button>
-</div>
-  
-<textarea name="" id="out" cols="30" rows="10"></textarea>
-
   
 <script id="jsbin-javascript">
 var msg = "Please input something!";
