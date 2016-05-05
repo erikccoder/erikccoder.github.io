@@ -12,6 +12,6 @@ javascript:(function()%7Bif(window%5B%27pgzp%27%5D)%7B_pgzpToggleBookmarklet()%3
 
 bookmarklet code:
 ```
-javascript:(function(){if(!document.getElementById("iPadReader")){var a=document.createElement("script");a.setAttribute("type","text/javascript"),a.setAttribute("charset","utf-8"),a.src='http://erikccoder.com/file/assets/Reader.js?'+((new Date()).getTime()),a.id="iPadReader",document.head.appendChild(a)}})();
+javascript:(function(){if(!document.getElementById("iPadReader")){var a=document.createElement("script");a.setAttribute("type","text/javascript"),a.setAttribute("charset","utf-8"),a.src='//erikccoder.github.io/tools/iPadMangaReader.js?'+((new Date()).getTime()),a.id="iPadReader",document.head.appendChild(a)}})();
 ```
 
