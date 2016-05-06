@@ -1,3 +1,8 @@
+[Comic Reader](comicReader.js)
+```
+javascript:(function()%7Bif(!document.getElementById(%22iPadReader%22))%7Bvar%20a%3Ddocument.createElement(%22script%22)%3Ba.setAttribute(%22type%22%2C%22text%2Fjavascript%22)%2Ca.setAttribute(%22charset%22%2C%22utf-8%22)%2Ca.src%3D%22%2F%2Ferikccoder.github.io%2Ftools%2FcomicReader.js%3F%22%2B(new%20Date).getTime()%2Ca.id%3D%22iPadReader%22%2Cdocument.head.appendChild(a)%7D%7D)()
+```
+
 [PageZipper](http://www.printwhatyoulike.com/pagezipper)
 ===
 
