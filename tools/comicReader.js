@@ -5,12 +5,10 @@ var libjQuery = "ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
 var c = document.createElement("link");
     c.rel = "stylesheet";
     c.href = "//erikccoder.github.io/tools/libs/magnificpopup.all.min.css";	
-document.head.appendChild(c);
 
 var c2 = document.createElement("link");
     c2.rel = "stylesheet";
     c2.href = "//erikccoder.github.io/tools/css/comicReader.css";	
-document.head.appendChild(c2);
 
 
 
@@ -273,6 +271,12 @@ function PageEngineSet(){
 }
 
 function PageReset(){
+	var AllLinks = document.querySelectorAll("head>link");
+    for (var i = 0; i < AllLinks.length; ++i){
+    	document.head.removeChild(AllLinks[i]);
+    }
+    document.body.style.cssText = "margin:0;padding:0;text-align:center;";
+        
 	// clear the images for more memory
 	var emptyImageSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=";
 	var imgs = document.getElementsByTagName("img");
@@ -282,19 +286,25 @@ function PageReset(){
 	}
 	
 	document.body.innerHTML = "";
-
+	var divRoot = document.createElement("div");
+		divRoot.className = "root"
 	for (i = 0; i < getPageCount(); ++i) {
-		var _a = document.createElement("a");
-		_a.textContent = "Comic[" + (i+1) + "]";
-		_a.href = "#";
-		_a.className = "ek-comic";
-		document.body.appendChild(_a);
+		var _a = $("<a>");
+// 		_a.text("Comic[" + (i+1) + "]");
+		_a.attr("href", "#");
+		_a.addClass("ek-comic");
+		divRoot.appendChild(_a[0]);
 	}
+	document.body.appendChild(divRoot);
 	
 	var m = document.createElement("meta");
         m.name = "viewport";
 		m.content = "user-scalable=no,width=device-width,initial-scale=1.0,maximum-scale=1.0";
-		document.getElementsByTagName("head")[0].appendChild(m);
+// 		document.getElementsByTagName("head")[0].appendChild(m);
+		
+	
+	document.head.appendChild(c);
+	document.head.appendChild(c2);
 }
 
 
