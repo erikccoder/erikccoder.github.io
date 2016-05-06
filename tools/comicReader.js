@@ -291,10 +291,10 @@ function PageReset(){
 		document.body.appendChild(_a);
 	}
 	
-	var m = _document.createElement("meta");
+	var m = document.createElement("meta");
         m.name = "viewport";
 		m.content = "user-scalable=no,width=device-width,initial-scale=1.0,maximum-scale=1.0";
-	document.getElementsByTagName("head")[0].appendChild(m);
+		document.getElementsByTagName("head")[0].appendChild(m);
 }
 
 
