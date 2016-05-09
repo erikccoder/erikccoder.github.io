@@ -7,11 +7,11 @@ bookmarklet code:
 javascript:(function()%7Bif%20(!document.getElementById(%22GrabVideo%22))%20%7Bvar%20a%20%3D%20document.createElement(%22script%22)%3Ba.setAttribute(%22type%22%2C%20%22text%2Fjavascript%22)%2C%20a.setAttribute(%22charset%22%2C%20%22utf-8%22)%2C%20a.src%20%3D%20%22%2F%2Ferikccoder.github.io%2Ftools%2FGrabVideo.js%3F%22%20%2B%20(new%20Date).getTime()%2C%20a.id%20%3D%20%22iPadReader%22%2C%20document.head.appendChild(a)%7D%7D)()
 ```
 
-How to use:
-======
+##### How to use:
+
 
   1. You play and stop html video.
-  2. script will display all posible links eg. <video> <source> <iframe>
+  2. script will display all posible links eg. `<video> <source> <iframe>`
   3. click the link that is most like the video link
   4. script will this link directly on next run. 
   5. repeeat 0 to 2 until you get the video link
