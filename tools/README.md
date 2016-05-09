@@ -15,7 +15,7 @@ javascript:(function()%7Bif%20(!document.getElementById(%22GrabVideo%22))%20%7Bv
   3. click the link that is most like the video link
   4. script will this link directly on next run. 
   5. repeeat 0 to 2 until you get the video link
-  6. add "?ek=clear" to clear settings
+  6. add "?ek=clear" in url to clear settings
 
 
 [Comic Reader](comicReader.js)
