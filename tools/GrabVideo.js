@@ -1,6 +1,6 @@
 ((_window, _document) => {
-	var $ = function(selector){ return _document.querySelectorAll(selector); },
-		doReset = _window.location.search.match("ek=clear");
+	var $ = function(selector){ return _document.querySelectorAll(selector); };
+	var doReset = _window.location.search.match("ek=clear");
 	if(!doReset && localStorage.ek)
 	{
 		var ek = JSON.parse(localStorage.ek),
