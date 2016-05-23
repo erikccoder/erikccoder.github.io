@@ -21,7 +21,7 @@ People could stand in front of Big TV wall and interactive with the Peppa, her f
 
 Everything with detecting area near the TV wall will be captured and tracked by a HD camera. An application developed with [openFrameworks][ref_of] was checking the objects and calculate their motion frame by frame. Shoppers could interact with Peppa & her friends through the motions detected by the system. Additional interactive gifts, which falling down from the top of TV wall, could be hit by shoppers too. [Optical flow][ref_o] was used to implement this system.
 
-![Cover][img_t]
+![Playing][img_play]
 
 
 ## Visual Parts ##
