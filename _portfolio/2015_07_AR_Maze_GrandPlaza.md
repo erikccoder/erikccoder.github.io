@@ -14,7 +14,7 @@ Augmented reality ([AR][ref_ar]) mini game for [Grand Plaza's][ref_gp] promotion
 
 [[MORE]]
 
-This was a AR kiosk which providing a mini maze solving game for people to win coupons. The game was developed with [Unity][ref_u].
+This was an AR kiosk which providing a mini maze solving game for people to win coupons. The game was developed with [Unity][ref_u] and it has two levels, easy & normal modes.
 
 [![board][img_bd]][vid_bd]
 
