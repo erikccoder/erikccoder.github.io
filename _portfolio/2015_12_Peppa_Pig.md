@@ -37,6 +37,7 @@ An digital photo of the shoppers and the characters will be composited and saved
 ## Networking ##
 Open Sound Control ([OSC][ref_osc]) was the gateway and used for interprocess communication ([IPC][ref_ipc]) between the apps. It's fast & easy to use.
 
+![setup][img_net]
 
 > Open Sound Control (OSC) is a protocol for networking sound synthesizers, computers, and other multimedia devices for purposes such as musical performance or show control. OSC's advantages include interoperability, accuracy, flexibility and enhanced organization and documentation. [WIKIPEDIA][ref_osc]
 
@@ -79,3 +80,5 @@ Project Page: [430 Limited][ref_4]
 [img_pt]: http://erikccoder.github.io/img/peppa_phototaking.jpg
 
 [vid_pt]: http://erikccoder.github.io/video/peppa_phototaking.mp4
+
+[img_net]: http://erikccoder.github.io/img/peppa_networking.jpg
