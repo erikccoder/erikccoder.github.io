@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2016 by anonymous (http://jsbin.com/yibokogiqo/11/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>erik encryption</title>
+  <style>
+	.root {
+	    max-width: 768px;
+	    margin: 0 auto;
+	}
+		
+	textarea {
+	    width: 100%;
+	    min-width: 384px;
+	}
+	
+	input#pw {
+	    margin: 20px;
+	}
+	
+	button {
+	    width: 45%;
+	    margin: 0 1em 2em 1em;
+	}
+	
+	.buttons {
+	    text-align: center;
+	}
+	
+  </style>
+</head>
+<body>
+ <div class="root">
+	<textarea name="" id="txt" cols="30" rows="20" placeholder="input text"></textarea>
+	
+	<div>
+	  password: <input id="pw" type="text" value="">
+	</div>
+	<div class="buttons">
+	  <button onclick="doEncrypt()">encrypt</button>
+	  <button onclick="doDecrypt()">decrypt</button>
+	</div>
+	  
+	<textarea name="" id="out" cols="30" rows="20" placeholder="Something is coming out!"></textarea>
+
+</div>
+  
+<script id="jsbin-javascript">
+var msg = "Please input something!";
+var $ = function(_sel){
+  return document.querySelector(_sel);
+};
+function encrypt(txt, pw){
+  var out = "";
+  var code=0;
+  for(var i=0; i<txt.length; i++){
+    code = txt.charCodeAt(i) + pw.charCodeAt(i%pw.length);
+    out += String.fromCharCode(code);
+  }
+  return out;
+}
+function decrypt(txt, pw){
+  var out = "";
+  var code=0;
+  for(var i=0; i< txt.length; i++){
+    code = txt.charCodeAt(i) - pw.charCodeAt(i%pw.length);
+    out += String.fromCharCode(code);
+  }
+  return out;
+}
+function encode_utf8(s) {
+  return unescape(encodeURIComponent(s));
+}
+
+function decode_utf8(s) {
+  return decodeURIComponent(escape(s));
+}
+function doEncrypt(){
+  var _txt = $("#txt");
+  var _pw = $("#pw");
+  var _out = $("#out");
+  
+  if(_txt.value.length == 0 || _pw .value.length == 0){
+	_out.value = msg;
+  }
+  else {
+	_out.value = encode_utf8(encrypt(_txt.value, _pw.value));
+  }
+}
+function doDecrypt(){
+  var _txt = $("#txt");
+  var _pw = $("#pw");
+  var _out = $("#out");
+  
+  if(_txt.value.length == 0 || _pw .value.length == 0){
+	_out.value = msg;
+  }
+  else {
+	_out.value = decrypt(decode_utf8(_txt.value), _pw.value);
+  }
+}
+</script>
+</body>
+</html>
