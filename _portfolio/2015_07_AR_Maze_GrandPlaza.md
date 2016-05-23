@@ -20,7 +20,10 @@ This was an AR kiosk which providing a mini maze solving game for people to win 
 
 [![winning][img_win]][vid_win]
 
+Project Page: [430 Limited][ref_430]
 
+
+[ref_430]: http://www.430.com.hk/maze-grand-plaza/
 
 [ref_ar]: https://en.wikipedia.org/wiki/Augmented_reality
 
