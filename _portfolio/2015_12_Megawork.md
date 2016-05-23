@@ -1,5 +1,5 @@
 ---
-title World We Made Pop-up Store @ Shanghai
+title: World We Made Pop-up Store @ Shanghai
 tags: 
     - portfolio 
     - openframeowrks 
