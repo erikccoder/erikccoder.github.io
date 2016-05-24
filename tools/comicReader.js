@@ -122,12 +122,13 @@ var parseEngine = {
 
 
 
-PageEngineSet()
-PageReset();
 
 
 async(libjQuery, function(){
 	
+	PageEngineSet()
+	PageReset();
+
 	async(libMagnific, function() 
 	{
 		var ekComic = $(".ek-comic");
