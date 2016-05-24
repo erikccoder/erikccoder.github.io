@@ -10,6 +10,7 @@ var c2 = document.createElement("link");
     c2.rel = "stylesheet";
     c2.href = "//erikccoder.github.io/tools/css/comicReader.css";	
 
+var emptyImageSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=";
 
 function getElementByXpath(a, b) {
             return b = b || document, document.evaluate(a, null === b ? _document : b, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
