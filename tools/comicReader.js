@@ -103,7 +103,7 @@ var parseEngine = {
 	    }, getImgURL = function(a) {
 	        var h = c[a],
 	            i = document.createElement("html");
-	        if (null === h || "" === h || void 0 === h) return emptyImageSrc;
+	        if (null === h || "" === h || void 0 === h) return '';
 	        var j = new XMLHttpRequest;
 	        j.open("GET", h, !1), j.send(), i.innerHTML = j.responseText;
 	        var k = getElementByXpath(d, i);
