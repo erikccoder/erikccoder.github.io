@@ -1,4 +1,4 @@
-var libjQuery = "ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+var libjQuery = "//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js",
 	libMagnific = "//erikccoder.github.io/tools/libs/jquery.magnific-popup.min.js";
 	
 
@@ -14,6 +14,7 @@ var c2 = document.createElement("link");
 function getElementByXpath(a, b) {
             return b = b || document, document.evaluate(a, null === b ? _document : b, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
 }
+
 function dm5Handler() 
 {
 	var url = window.location.href;
@@ -129,44 +130,11 @@ async(libjQuery, function(){
 	
 	async(libMagnific, function() 
 	{
-		/*
-		var _img = $("#cp_image").attr("src");
-
-		var _a = $("<a>");
-			_a.text("LightBox").attr("href", _img).addClass("ek-comic");
-		
-
-		$("body").append(_a);
-		
-		
-		*/
 		var ekComic = $(".ek-comic");
 		var magnificPopup = $.magnificPopup.instance;
 		var oldTitle = window.title;
 		var $window = $("html, body");
-		/*
-		var seq = (new Array(getPageCount())).fill().map((e, i) => {return i;});
 		
-		if(getCurrentPage() > 0 && getCurrentPage() < getPageCount()-1){	
-			var next = seq.slice(getCurrentPage());
-			var prev = seq.slice(0, getCurrentPage());
-			
-			seq = [next.shift()];
-			while(next.length || prev.length){
-				if(next.length) seq.push(next.shift());
-				if(prev.length) seq.push(prev.pop());
-			}
-		}
-		var _s;
-		_s = seq.shift(); ekComic[_s].href = getImgURL(_s);
-		_s = seq.shift(); ekComic[_s].href = getImgURL(_s);
-		*/
-		/*
-		ekComic.each(function(i){
-			var img = getImgURL(i);
-			this.href = img;
-		});
-		*/
 		function preLoadSiblings(index){
 			for(var i = index + 2; i >= index-2; i--)
 			{
