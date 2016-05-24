@@ -15,6 +15,16 @@ var emptyImageSrc = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAA
 function getElementByXpath(a, b) {
             return b = b || document, document.evaluate(a, null === b ? _document : b, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
 }
+function async(u, c) {
+
+  var d = document, 
+	  t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+  o.src = u;
+  if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+  d.body.appendChild(o);
+}
 
 function dm5Handler() 
 {
@@ -96,37 +106,35 @@ var parseEngine = {
 	        d = "//body/div[1]/a/img",
 	        e = "//body/div/div[1]/a[2]",
 	        f = "//body/div/div[1]/a[3]";
-	    getCurrentPage = function() {
-	        return a - 1
-	    }, getPageCount = function() {
-	        return b
-	    }, getImgURL = function(a) {
-	        var h = c[a],
-	            i = document.createElement("html");
-	        if (null === h || "" === h || void 0 === h) return '';
-	        var j = new XMLHttpRequest;
-	        j.open("GET", h, !1), j.send(), i.innerHTML = j.responseText;
-	        var k = getElementByXpath(d, i);
-	        return a > 0 && (c[a - 1] = getElementByXpath(e, i).href), b - 1 > a && (c[a + 1] = getElementByXpath(f, i).href), k.src
-	    }, setCurrentPage = function(b) {
-	        a = b + 1
-	    }, getPageURL = function(a) {
-	        return c[a]
-	    }, getPrevChapter = function() {
-	        return !1
-	    }, getNextChapter = function() {
-	        return !1
-	    }, c[getCurrentPage()] = location.pathname
-        }
+			getCurrentPage = function() {
+				return a - 1
+			}, getPageCount = function() {
+				return b
+			}, getImgURL = function(a) {
+				var h = c[a],
+					i = document.createElement("html");
+				if (null === h || "" === h || void 0 === h) return '#';
+				var j = new XMLHttpRequest;
+				j.open("GET", h, !1), j.send(), i.innerHTML = j.responseText;
+				var k = getElementByXpath(d, i);
+				return a > 0 && (c[a - 1] = getElementByXpath(e, i).href), b - 1 > a && (c[a + 1] = getElementByXpath(f, i).href), k.src
+			}, setCurrentPage = function(b) {
+				a = b + 1
+			}, getPageURL = function(a) {
+				return c[a]
+			}, getPrevChapter = function() {
+				return !1
+			}, getNextChapter = function() {
+				return !1
+			}, c[getCurrentPage()] = location.pathname
+	}
 };
 
 
 
 
 
-
 async(libjQuery, function(){
-	
 	PageEngineSet()
 	PageReset();
 
@@ -308,16 +316,5 @@ function PageReset(){
 	document.head.appendChild(c);
 	document.head.appendChild(c2);
 }
-
-
-function async(u, c) {
-  var d = document, t = 'script',
-      o = d.createElement(t),
-      s = d.getElementsByTagName(t)[0];
-  o.src = '//' + u;
-  if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-  s.parentNode.insertBefore(o, s);
-}
-
 
 
