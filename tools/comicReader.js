@@ -83,7 +83,37 @@ function dm5Handler()
 
 var parseEngine = {
 	"dm5.com": dm5Handler,
-	"dm9.com": dm5Handler
+	"dm9.com": dm5Handler,
+	"g.e-.+.org/s/": function() 
+	{
+	    var a = parseInt(location.pathname.replace(/\/s\/.+-([0-9]*)/g, "$1")),
+	        b = parseInt(getElementByXpath("/html/body/div/div[1]/div/span[2]").innerText),
+	        c = [],
+	        d = "//body/div[1]/a/img",
+	        e = "//body/div/div[1]/a[2]",
+	        f = "//body/div/div[1]/a[3]";
+	    getCurrentPage = function() {
+	        return a - 1
+	    }, getPageCount = function() {
+	        return b
+	    }, getImgURL = function(a) {
+	        var h = c[a],
+	            i = document.createElement("html");
+	        if (null === h || "" === h || void 0 === h) return emptyImageSrc;
+	        var j = new XMLHttpRequest;
+	        j.open("GET", h, !1), j.send(), i.innerHTML = j.responseText;
+	        var k = getElementByXpath(d, i);
+	        return a > 0 && (c[a - 1] = getElementByXpath(e, i).href), b - 1 > a && (c[a + 1] = getElementByXpath(f, i).href), k.src
+	    }, setCurrentPage = function(b) {
+	        a = b + 1
+	    }, getPageURL = function(a) {
+	        return base + "p=" + String(a)
+	    }, getPrevChapter = function() {
+	        return !1
+	    }, getNextChapter = function() {
+	        return !1
+	    }, c[getCurrentPage()] = location.pathname
+        }
 };
 
 
