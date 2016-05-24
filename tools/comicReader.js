@@ -11,7 +11,9 @@ var c2 = document.createElement("link");
     c2.href = "//erikccoder.github.io/tools/css/comicReader.css";	
 
 
-
+function getElementByXpath(a, b) {
+            return b = b || document, document.evaluate(a, null === b ? _document : b, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue
+}
 function dm5Handler() 
 {
 	var url = window.location.href;
