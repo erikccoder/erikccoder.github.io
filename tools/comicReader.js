@@ -110,7 +110,7 @@ var parseEngine = {
 	    }, setCurrentPage = function(b) {
 	        a = b + 1
 	    }, getPageURL = function(a) {
-	        return base + "p=" + String(a)
+	        return c[a]
 	    }, getPrevChapter = function() {
 	        return !1
 	    }, getNextChapter = function() {
