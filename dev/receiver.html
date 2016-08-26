@@ -49,11 +49,11 @@ limitations under the License.
 			}
 		}
 		console.log('Query variable %s not found', variable);
+		return null;
 	}
 	let redi = getQueryVariable('redi');
-	setTimeout(()=>{
-			location = redi;
-	}, 3000);
+	if(redi === null) return;
+	location = redi;
     </script>
     
 
