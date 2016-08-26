@@ -52,8 +52,9 @@ limitations under the License.
 		return null;
 	}
 	let redi = getQueryVariable('redi');
-	if(redi === null) return;
-	location = redi;
+	if(redi){
+		location = redi;
+	}
     </script>
     
 
