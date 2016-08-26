@@ -40,14 +40,6 @@ limitations under the License.
 	<DIV id="message">Talk to me</DIV>
     <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
     <script type="text/javascript">
-	var script = document.createElement('script');
-	script.src = "//10.0.10.93/receiver.js?t=" + Date.now();
-	script.onload = function () {
-		console.log("receiver.js loaded");
-	};
-	document.head.appendChild(script); //or something of the likes
-    </script>
-    <script type="text/javascript">
       window.onload = function() {
         cast.receiver.logger.setLevelValue(0);
         window.castReceiverManager = cast.receiver.CastReceiverManager.getInstance();
@@ -105,6 +97,14 @@ limitations under the License.
         document.getElementById("message").innerHTML=text + " by erik.github";
         window.castReceiverManager.setApplicationState(text);
       };
+    </script>
+    <script type="text/javascript">
+	var script = document.createElement('script');
+	script.src = "//10.0.10.93:8080/receiver.js?t=" + Date.now();
+	script.onload = function () {
+		console.log("receiver.js loaded");
+	};
+	document.head.appendChild(script); //or something of the likes
     </script>
 
   </body>
