@@ -1,62 +1,21 @@
-<!--
-Copyright (C) 2014 Google Inc. All Rights Reserved.
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
--->
 <!DOCTYPE html>
 <html>
   <head>
-    <style type="text/css">
-	  body {
-	    overflow:hidden;
-	  }
-      div{
-	    height:720PX;
-	    width:1280PX;
-	    text-align:center;
-	    border:0px solid silver;
-	    display: table-cell;
-	    vertical-align:middle;
-	    color:#FFFFFF;
-	    background-color:#000000;
-	    font-weight:bold;
-	    font-family:Verdana, Geneva, sans-serif;
-	    font-size:40px;
-	}
-    </style>
-    <title>Cast Hello Text</title>
+    <meta charset="utf-8" />
+    <title>WI Cast React receiver</title>
+    <script src="https://npmcdn.com/react@15.3.1/dist/react.js"></script>
+    <script src="https://npmcdn.com/react-dom@15.3.1/dist/react-dom.js"></script>
+    <script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+    <!-- <script src="https://npmcdn.com/jquery@3.1.0/dist/jquery.min.js"></script> -->
+    <!-- <script src="https://npmcdn.com/remarkable@1.6.2/dist/remarkable.min.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
   </head>
   <body>
-	<DIV id="message">Will redirect soon </DIV>
-    <script type="text/javascript">
-	function getQueryVariable(variable) {
-		var query = window.location.search.substring(1);
-		var vars = query.split('&');
-		for (var i = 0; i < vars.length; i++) {
-			var pair = vars[i].split('=');
-			if (decodeURIComponent(pair[0]) == variable) {
-			    return decodeURIComponent(pair[1]);
-			}
-		}
-		console.log('Query variable %s not found', variable);
-		return null;
-	}
-	let redi = getQueryVariable('redi');
-	if(redi){
-		location = redi;
-	}
-    </script>
-    
-
+    <div id="content">This is #content</div>
+    <script src='./node_modules/react-list/react-list.js'></script>
+    <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/receiver/2.0.0/cast_receiver.js"></script>
+    <script type="text/babel" src="receiver.js"></script>
   </body>
 </html>
