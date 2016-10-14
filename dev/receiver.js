@@ -134,7 +134,7 @@ class App extends React.Component{
     };
 
     getBackgroundStyle(i){
-      let imgUrl = this.state.images[i].url;
+      let imgUrl = this.state.images[i].original_url;
       return {
           backgroundImage: 'url('+ imgUrl +')'
       };
