@@ -138,14 +138,13 @@ class App extends React.Component{
     getBackgroundStyle(i){
       let imgUrl = this.state.images[i].original_url;
       return {
-          backgroundImage: 'url('+ imgUrl +')'
+          backgroundImage: 'url("'+ imgUrl +'")'
       };
     };
 
     renderItem(index, key) {
       let className = this.getClassName(key);
       let style = this.getBackgroundStyle(key);
-        console.log(index, style);
       return (
           <div className={className}
                 key={key}
