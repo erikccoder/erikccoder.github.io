@@ -90,6 +90,7 @@ class App extends React.Component{
 
     fetchJson(url){
 
+        console.log("start fetching", url);
       fetch(url)
         .then(response => response.json())
         .then(data=>
@@ -97,6 +98,7 @@ class App extends React.Component{
             this.setState({
                 images: data,
             });
+            console.log("loaded",data);
         })
         .catch(err => console.warn('data.json failed',err));
     };
@@ -143,6 +145,7 @@ class App extends React.Component{
     renderItem(index, key) {
       let className = this.getClassName(key);
       let style = this.getBackgroundStyle(key);
+        console.log(index, style);
       return (
           <div className={className}
                 key={key}
