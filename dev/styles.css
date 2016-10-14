@@ -1,0 +1,28 @@
+#content{
+  background: #111;
+  color: #fff;
+  position: relative;
+}
+div.image{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+
+  opacity: 1;
+  transition: opacity .575s ease;
+}
+
+div.hide{
+  opacity: 0;
+}
+
+img{
+  width: 100%;
+  height: auto;
+  /*position: absolute;*/
+  /*top: 0;
+  left: 0;*/
+}
