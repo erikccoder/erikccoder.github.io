@@ -98,7 +98,7 @@ function dm5Handler()
 var parseEngine = {
 	"dm5.com": dm5Handler,
 	"dm9.com": dm5Handler,
-	"g.e-.+.org/s/": function() 
+	"e-.+.org/s/": function() 
 	{
 	    var a = parseInt(location.pathname.replace(/\/s\/.+-([0-9]*)/g, "$1")),
 	        b = parseInt(getElementByXpath("/html/body/div/div[1]/div/span[2]").innerText),
