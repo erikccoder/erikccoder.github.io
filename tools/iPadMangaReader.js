@@ -137,7 +137,7 @@ if (window.location.host === "www.dm5.com" && !(/^\/m/.test(window.location.path
                     return false;
                 };
             },                                                                                   
-            "g.e-.+.org/s/" : function()
+            "e-.+.org/s/" : function()
             {            
             	var iNo = parseInt(location.pathname.replace(/\/s\/.+-([0-9]*)/g, "$1")),
             		numPage = parseInt(getElementByXpath("//*[@id=\"i2\"]/div[1]/div/span[2]").innerText),
