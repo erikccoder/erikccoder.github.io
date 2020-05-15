@@ -9,7 +9,7 @@
 		return _$.text || _$.href || _$.content
 	};
 
-	const LINK = "http://localhost:8080/"
+	const LINK = "https://erikccoder.github.io/markdown-web-note/index.html"
 
 	const author = $v('meta[name="author"], meta[name="twitter:creator"], meta[property="article:author"]');
 	const description = $v('meta[name="description"], meta[name="twitter:description"], meta[property="og:description"]');
