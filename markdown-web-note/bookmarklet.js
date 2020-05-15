@@ -51,14 +51,14 @@
 
 	str += `${link}\n`;
 
-	console.log(str);
+
 
 	// const markdown = btoa(str);
 	const markdown = encodeURIComponent(btoa(unescape(encodeURIComponent(str))));
 	const fileName = location.pathname.replace(/\/$/g, '').split('/').pop();
 	
 
-	console.log(markdown);	
+	
 	
 	// return;
 	setTimeout(()=>{
