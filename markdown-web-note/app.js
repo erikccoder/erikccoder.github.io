@@ -75,31 +75,12 @@ const removeToken = (v) => localStorage.removeItem('token');
 		try{
 			const res = await instance.get(filepath);
 			isExists = true;
-			sha = res.data.sha;			
-
-			// const _c = decodeURIComponent(
-			// 	escape(
-			// 		window.atob(
-			// 			res.data.content
-			// 		)
-			// 	)
-			// );
-
-			// const _c2 = decodeURIComponent(
-			// 	escape(
-			// 		window.atob(
-			// 			tmp
-			// 		)
-			// 	)
-			// )			
+			sha = res.data.sha;						
 		}
 		catch(e)
 		{
 			isExists = false;
-		}
-
-		// return;
-				
+		}				
 		if(file && content)
 		{
 			let res;
