@@ -32,6 +32,7 @@
 				 : null;
 
 	const data = {
+		link,
 		author,		
 		image,		
 		time,
@@ -60,7 +61,10 @@
 
 	const markdown = encodeURIComponent(btoa(unescape(encodeURIComponent(str))));
 	const fileName = location.pathname.replace(/\/$/g, '').split('/').pop();
-		
+	
+
+	console.log({image});	
+	
 	// return;
 	setTimeout(()=>{
 		location = `${LINK}?file=${fileName}&content=${markdown}`
