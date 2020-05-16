@@ -68,8 +68,8 @@
 	// return;
 	setTimeout(()=>{
 		location = DEBUG 
-					? `${LINK}?file=${fileName}&content=${markdown}` 
-					: `${LINK}?file=DEBUG&content=${markdown}` 
+					? `${LINK}?file=DEBUG&content=${markdown}` 
+					: `${LINK}?file=${fileName}&content=${markdown}` 
 	},0)
 
 })()
