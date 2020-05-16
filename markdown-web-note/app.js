@@ -31,7 +31,7 @@ const removeToken = (v) => localStorage.removeItem('token');
 	}
 	catch(e)
 	{
-		console.log('need log in');
+		// console.log('need log in');
 
 		if(loading)
 		{
@@ -64,10 +64,24 @@ const removeToken = (v) => localStorage.removeItem('token');
 	{
 		// console.log(user);			
 		const searchParams = new URLSearchParams(document.location.search);
-		const file = decodeURIComponent(searchParams.get('file')); 
-		const content = decodeURIComponent(searchParams.get('content'));
+		const b64 = decodeURIComponent(searchParams.get('d')); 
+		const str = decodeURIComponent(escape(window.atob(b64)));
+		const data = JSON.parse(str);
+		console.log(data);
+		const {
+			link,
+			author,		
+			image,		
+			time,
+			title,
+			video,
+			tags,
+			description,
+			selection,
+			filename		
+		} = data;
 
-		const filepath = `${API}/repos/${user.login}/${REPO}/contents/${PATH}/${file}.md`;
+		const filepath = `${API}/repos/${user.login}/${REPO}/contents/${PATH}/${filename}.md`;
 
 		let isExists;
 		let sha;
@@ -81,7 +95,47 @@ const removeToken = (v) => localStorage.removeItem('token');
 			isExists = false;
 		}
 
-		// return;
+		//data to markdown
+		let markdown = '------\n';
+		[
+			'link',
+			'author',		
+			'image',		
+			'time',
+			'title',
+			'video',
+			'tags',
+		].forEach( k => 
+		{
+			if(data[k]) markdown += `${k}: ${data[k]}\n`
+		});
+
+		markdown += '------\n\n';
+
+		if(title){
+			markdown += `# ${title}\n\n`;
+		}
+
+		if(description){
+			markdown += `> ${description}`;
+		}
+			
+		markdown += `\n\n`;	
+		if(selection){
+			const turndownService = new TurndownService()
+			const md = turndownService.turndown(selection)
+			markdown += `${md}\n\n`;
+		}
+
+		if(image){
+			markdown += `![image](${image})\n\n`;
+		}
+
+		markdown += `${link}\n`;
+
+		console.log(markdown);
+
+		return;
 				
 		if(file && content)
 		{
@@ -92,7 +146,7 @@ const removeToken = (v) => localStorage.removeItem('token');
 					filepath,
 					{
 						content,
-						message: (isExists ? 'Update' : 'Create') + ` ${file}.md`,
+						message: (isExists ? 'Create' : 'Update') + ` ${file}.md`,
 						sha,						
 					}
 				)
