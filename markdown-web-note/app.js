@@ -96,7 +96,7 @@ const removeToken = (v) => localStorage.removeItem('token');
 		}
 
 		//data to markdown
-		let markdown = '------\n';
+		let markdown = '---\n';
 		[
 			'link',
 			'author',		
@@ -110,7 +110,7 @@ const removeToken = (v) => localStorage.removeItem('token');
 			if(data[k]) markdown += `${k}: ${data[k]}\n`
 		});
 
-		markdown += '------\n\n';
+		markdown += '---\n\n';
 
 		if(title){
 			markdown += `# ${title}\n\n`;
