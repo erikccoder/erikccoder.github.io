@@ -11,7 +11,6 @@ const removeToken = (v) => localStorage.removeItem('token');
 		removeToken();
 	}
 
-	const DEBUG = location.href.match(/localhost/) !== null;	
 	const API = "https://api.github.com"
 	const REPO = 'notes';
 	const PATH = 'posts'
@@ -65,7 +64,7 @@ const removeToken = (v) => localStorage.removeItem('token');
 	{
 		// console.log(user);			
 		const searchParams = new URLSearchParams(document.location.search);
-		const file = DEBUG ? 'DEBUG' : decodeURIComponent(searchParams.get('file')); 
+		const file = decodeURIComponent(searchParams.get('file')); 
 		const content = decodeURIComponent(searchParams.get('content'));
 
 		const filepath = `${API}/repos/${user.login}/${REPO}/contents/${PATH}/${file}.md`;
@@ -80,7 +79,10 @@ const removeToken = (v) => localStorage.removeItem('token');
 		catch(e)
 		{
 			isExists = false;
-		}				
+		}
+
+		// return;
+				
 		if(file && content)
 		{
 			let res;
