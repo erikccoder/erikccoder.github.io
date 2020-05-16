@@ -15,7 +15,7 @@
 
 	const DEBUG = window.markdownWebNoteDebug;
 
-	const LINK = "//erikccoder.github.io/markdown-web-note/index.html"
+	const LINK = "https://erikccoder.github.io/markdown-web-note/index.html"
 	const selection = window.getSelection().toString();
 	const author = $v('meta[name="author"], meta[name="twitter:creator"], meta[property="article:author"]');
 	const description = selection
