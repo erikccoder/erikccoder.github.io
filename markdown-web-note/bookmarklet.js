@@ -4,7 +4,6 @@
 	const $v = (_q) => {
 		const _$ = $(_q);
 		const len = _$.length;
-		console.log(len);
 		if(!len) 
 		{
 			return null;
