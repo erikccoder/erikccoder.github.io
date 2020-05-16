@@ -16,7 +16,7 @@ var TurndownService=function(){"use strict";function e(e,n){return Array(n+1).jo
 
 	const DEBUG = window.markdownWebNoteDebug;
 
-	const LINK = "//erikccoder.github.io/markdown-web-note/index.html"
+	const LINK = "//erikccoder.github.io/markdown-web-note/index.html";
 
 
 	const turndownService = new TurndownService();
@@ -67,7 +67,7 @@ var TurndownService=function(){"use strict";function e(e,n){return Array(n+1).jo
 	str += `${link}\n`;
 
 	const markdown = encodeURIComponent(btoa(unescape(encodeURIComponent(str))));
-	const fileName = location.pathname.replace(/\/$/g, '').split('/').pop();
+	let fileName = location.pathname.replace(/\/$/g, '').split('/').pop() + '---' + location.hostname;	
 	
 		
 	setTimeout(()=>{
