@@ -142,7 +142,7 @@ const removeToken = (v) => localStorage.removeItem('token');
 				res = await instance.put(
 					filepath,
 					{
-						content,
+						content: encodeURIComponent(btoa(unescape(encodeURIComponent(markdown)))),
 						message: (isExists ? 'Create' : 'Update') + ` ${markdown}.md`,
 						sha,						
 					}
