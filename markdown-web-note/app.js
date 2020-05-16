@@ -67,7 +67,7 @@ const removeToken = (v) => localStorage.removeItem('token');
 		const b64 = decodeURIComponent(searchParams.get('d')); 
 		const str = decodeURIComponent(escape(window.atob(b64)));
 		const data = JSON.parse(str);
-		console.log(data);
+
 		const {
 			link,
 			author,		
@@ -133,9 +133,6 @@ const removeToken = (v) => localStorage.removeItem('token');
 
 		markdown += `${link}\n`;
 
-		console.log(markdown);
-
-		return;
 				
 		if(file && content)
 		{
