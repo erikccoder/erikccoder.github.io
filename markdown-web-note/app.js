@@ -134,7 +134,7 @@ const removeToken = (v) => localStorage.removeItem('token');
 		markdown += `${link}\n`;
 
 				
-		if(file && content)
+		if(filename)
 		{
 			let res;
 			try{
@@ -143,7 +143,7 @@ const removeToken = (v) => localStorage.removeItem('token');
 					filepath,
 					{
 						content,
-						message: (isExists ? 'Create' : 'Update') + ` ${file}.md`,
+						message: (isExists ? 'Create' : 'Update') + ` ${markdown}.md`,
 						sha,						
 					}
 				)
