@@ -92,7 +92,7 @@ const removeToken = (v) => localStorage.removeItem('token');
 					filepath,
 					{
 						content,
-						message: (isExists ? 'Create' : 'Update') + ` ${file}.md`,
+						message: (isExists ? 'Update' : 'Create') + ` ${file}.md`,
 						sha,						
 					}
 				)
