@@ -13,6 +13,9 @@
 		return _$[i].text || _$[i].src || _$[i].href || _$[i].content
 	};
 
+
+	const DEBUG = window.markdownWebNoteDebug;
+
 	const LINK = "//erikccoder.github.io/markdown-web-note/index.html"
 	const selection = window.getSelection().toString();
 	const author = $v('meta[name="author"], meta[name="twitter:creator"], meta[property="article:author"]');
@@ -62,12 +65,12 @@
 	const markdown = encodeURIComponent(btoa(unescape(encodeURIComponent(str))));
 	const fileName = location.pathname.replace(/\/$/g, '').split('/').pop();
 	
-
-	console.log({image});	
 	
 	// return;
 	setTimeout(()=>{
-		location = `${LINK}?file=${fileName}&content=${markdown}`
+		location = DEBUG 
+					? `${LINK}?file=${fileName}&content=${markdown}` 
+					: `${LINK}?DEBUG=1&file=${fileName}&content=${markdown}` 
 	},0)
 
 })()
