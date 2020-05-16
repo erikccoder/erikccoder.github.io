@@ -1,19 +1,26 @@
 (function(){
 
-	const $ = (_q) => document.querySelector(_q);	
+	const $ = (_q) => document.querySelectorAll(_q);	
 	const $v = (_q) => {
 		const _$ = $(_q);
-		if(!_$) {
+		const len = _$.length;
+		console.log(len);
+		if(!len) 
+		{
 			return null;
-		}		
-		return _$.text || _$.href || _$.content
+		}
+		const i = len - 1;		
+		return _$[i].text || _$[i].src || _$[i].href || _$[i].content
 	};
 
-	const LINK = "https://erikccoder.github.io/markdown-web-note/index.html"
-
+	const LINK = "//erikccoder.github.io/markdown-web-note/index.html"
+	const selection = window.getSelection().toString();
 	const author = $v('meta[name="author"], meta[name="twitter:creator"], meta[property="article:author"]');
-	const description = $v('meta[name="description"], meta[name="twitter:description"], meta[property="og:description"]');
-	const image = $v('meta[name="twitter:image"], meta[property="og:image"]');
+	const description = selection
+						? selection 
+						: $v('meta[name="description"], meta[name="twitter:description"], meta[property="og:description"]');
+	const image0 = $v('meta[name="twitter:image"], meta[property="og:image"]');
+	const image = image0 ? image0 : $v('img');
 	const keywords = $v('meta[name="keywords"]');	
 	const link = $v('link[rel="canonical"], meta[property="og:url"]') || window.location.href;
 	const time = $v('meta[property="article:published_time"]');
@@ -51,14 +58,11 @@
 
 	str += `${link}\n`;
 
-
-
-	// const markdown = btoa(str);
 	const markdown = encodeURIComponent(btoa(unescape(encodeURIComponent(str))));
 	const fileName = location.pathname.replace(/\/$/g, '').split('/').pop();
 	
 
-	
+	console.log({image});	
 	
 	// return;
 	setTimeout(()=>{
