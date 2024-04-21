@@ -205,33 +205,6 @@
       }
     </script>
     
-    <script>
-        /*
-            <select id="camera-select"></select>
-        */
-        const cameraSelect = document.getElementById('camera-select');
-        const tmp = localStorage.getItem("camOpt");
-        let camOpt = tmp ? JSON.parse(tmp) : null;
-        
-        navigator.mediaDevices.enumerateDevices()
-        .then(devices => {
-          const videoDevices = devices.filter(device => device.kind === 'videoinput');
-          videoDevices.forEach(device => {
-            const option = document.createElement('option');
-            option.value = device.deviceId;
-            option.text = device.label || `Camera ${cameraSelect.options.length + 1}`;
-            option.selected = camOpt ? (camOpt.video.deviceId == option.value) : false;
-            cameraSelect.appendChild(option);
-          });
-        })
-        .catch(error => console.error(error));
-        
-        cameraSelect.addEventListener("change", (evt)=>{
-            
-            const selectedCameraId = cameraSelect.value;
-            camOpt = { video: { deviceId: selectedCameraId } }
-            localStorage.setItem("camOpt", JSON.stringify(camOpt));
-        })
-    </script>
+    
     </body>
 </html>
