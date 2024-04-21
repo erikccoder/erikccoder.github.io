@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>erik AES encryption</title>
+  <style>
+	.root {
+	    max-width: 768px;
+	    margin: 0 auto;
+	}
+		
+	textarea {
+	    width: 100%;
+	    min-width: 384px;
+	}
+	
+	input#pw {
+	    margin: 20px;
+	}
+	
+	button {
+	    width: 45%;
+	    margin: 0 1em 2em 1em;
+	}
+	
+	.buttons {
+	    text-align: center;
+	}
+	
+  </style>
+</head>
+<body>
+ <div class="root">
+	<textarea name="" id="txt" cols="30" rows="20" placeholder="input text"></textarea>
+	
+	<div>
+	  password: <input id="pw" type="text" value="">
+	</div>
+	<div class="buttons">
+	  <button onclick="doEncrypt()">encrypt</button>
+	  <button onclick="doDecrypt()">decrypt</button>
+	</div>
+	  
+	<textarea name="" id="out" cols="30" rows="20" placeholder="Something is coming out!"></textarea>
+
+</div>
+  
+<script id="jsbin-javascript">
+var msg = "Please input something!";
+var $ = function(_sel){
+  return document.querySelector(_sel);
+};
+  
+function encrypt(txt, pw){
+  
+  return CryptoJS.AES.encrypt(JSON.stringify(txt), pw);
+}
+function decrypt(txt, pw){
+ 
+  return CryptoJS.AES.decrypt(txt, pw).toString(CryptoJS.enc.Utf8);
+}
+function encode_utf8(s) {
+  return unescape(encodeURIComponent(s));
+}
+
+function decode_utf8(s) {
+  return decodeURIComponent(escape(s));
+}
+function doEncrypt(){
+  var _txt = $("#txt");
+  var _pw = $("#pw");
+  var _out = $("#out");
+  
+  if(_txt.value.length == 0 || _pw .value.length == 0){
+	_out.value = msg;
+  }
+  else {
+	_out.value = encode_utf8(encrypt(_txt.value, _pw.value));
+  }
+}
+function doDecrypt(){
+  var _txt = $("#txt");
+  var _pw = $("#pw");
+  var _out = $("#out");
+  
+  if(_txt.value.length == 0 || _pw .value.length == 0){
+	_out.value = msg;
+  }
+  else {
+	_out.value = decrypt(decode_utf8(_txt.value), _pw.value);
+  }
+}
+</script>
+</body>
+</html>
