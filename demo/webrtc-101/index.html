@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>webrtc</title>
+    <style>
+        
+        .lds-ellipsis {
+          display: inline-block;
+          position: relative;
+          width: 80px;
+          height: 1rem;
+        }
+        .lds-ellipsis div {
+          position: absolute;
+          top: .3rem;
+          width: 13px;
+          height: 13px;
+          border-radius: 50%;
+          background: #000;
+          animation-timing-function: cubic-bezier(0, 1, 1, 0);
+        }
+        .lds-ellipsis div:nth-child(1) {
+          left: 8px;
+          animation: lds-ellipsis1 0.6s infinite;
+        }
+        .lds-ellipsis div:nth-child(2) {
+          left: 8px;
+          animation: lds-ellipsis2 0.6s infinite;
+        }
+        .lds-ellipsis div:nth-child(3) {
+          left: 32px;
+          animation: lds-ellipsis2 0.6s infinite;
+        }
+        .lds-ellipsis div:nth-child(4) {
+          left: 56px;
+          animation: lds-ellipsis3 0.6s infinite;
+        }
+        @keyframes lds-ellipsis1 {
+          0% {
+            transform: scale(0);
+          }
+          100% {
+            transform: scale(1);
+          }
+        }
+        @keyframes lds-ellipsis3 {
+          0% {
+            transform: scale(1);
+          }
+          100% {
+            transform: scale(0);
+          }
+        }
+        @keyframes lds-ellipsis2 {
+          0% {
+            transform: translate(0, 0);
+          }
+          100% {
+            transform: translate(24px, 0);
+          }
+        }
+
+
+    </style>
+</head>
+    <body>
+    
+    <table width="100%" border="1">
+        <tr>
+        <th>#</th>
+        <th>initiator</th>
+        <th>peer</th>
+        </tr>
+        <tr>
+        <td>step 1</td>
+        <td>
+            <select id="camera-select"></select>
+            <input type="button" value="create offer" onclick="step_1_initiator_create_offer()" />
+            <input id="createdOffer" type="text" hidden />
+            <div class="lds-ellipsis" id="step1-loader" style="visibility:hidden">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </td>
+        <td></td>
+        </tr>
+        <tr>
+        <td>step 2</td>
+        <td></td>
+        <td>
+        <input id="remoteOffer" type="text" placeholder="offer from initiator" />
+        <input type="button" value="accept offer" onclick="step_2_accept_remote_offer()" />
+        </td>
+        </tr>
+        <tr>
+        <td>step 3</td>
+        <td></td>
+        <td>
+        <input type="button" value="create answer" onclick="step_3_create_answer()" />
+        <input id="createdAnswer" type="text" hidden />
+        </td>
+        </tr>
+        <tr>
+        <td>step 4</td>
+        <td>
+        <input id="remoteAnswer" type="text" placeholder="answer from peer" />
+        <input type="button" value="accept answer" onclick="step_4_accept_answer()" />
+        </td>
+        <td></td>
+        </tr>
+    </table>
+    <hr/>
+    <div>
+        <textarea style="width:100%"></textarea>
+    </div>
+    <input id="text" type="text" />
+    <input type="button" value="send" onclick="send_text()" />
+    <hr/>
+        
+        
+    <table border="1">
+        <tr>
+        <th colspan="2">connection</th>
+        </tr>
+        <tr>
+        <th>connectionState</th>
+        <td id="connectionState">unknown</td>
+        </tr>
+        <tr>
+        <th>iceConnectionState</th>
+        <td id="iceConnectionState">unknown</td>
+        </tr>
+    </table>
+    
+    
+    <script>
+      let channel = null
+      const chatTxt = document.querySelector("textarea");
+      const connection = new RTCPeerConnection({ iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] })
+
+      connection.ondatachannel = (event) => {
+        console.log('ondatachannel')
+        channel = event.channel
+        // channel.onopen = event => console.log('onopen', event);
+        // channel.onmessage = event => console.log('onmessage', event);
+        channel.onmessage = (event) => chatTxt.value += (event.data + "\n");
+      }
+
+      connection.onconnectionstatechange = (event) => (document.getElementById('connectionState').innerText = connection.connectionState) // console.log('onconnectionstatechange', connection.connectionState)
+      connection.oniceconnectionstatechange = (event) =>
+        (document.getElementById('iceConnectionState').innerText = connection.iceConnectionState) // console.log('oniceconnectionstatechange', connection.iceConnectionState)
+
+      async function step_1_initiator_create_offer() {
+          
+        document.querySelector("#step1-loader").style.visibility = "inherit";
+          
+        channel = connection.createDataChannel('data')
+        // channel.onopen = event => console.log('onopen', event)
+        // channel.onmessage = event => console.log('onmessage', event)
+        channel.onmessage = (event) => chatTxt.value += (event.data + "\n");
+
+        connection.onicecandidate = (event) => {
+          // console.log('onicecandidate', event)
+          if (!event.candidate) {
+            document.getElementById('createdOffer').value = JSON.stringify(connection.localDescription)
+            document.getElementById('createdOffer').hidden = false
+            document.querySelector("#step1-loader").style.visibility = "hidden";
+          }
+        }
+
+        const offer = await connection.createOffer()
+        await connection.setLocalDescription(offer)
+      }
+
+      async function step_2_accept_remote_offer() {
+        const offer = JSON.parse(document.getElementById('remoteOffer').value)
+        await connection.setRemoteDescription(offer)
+      }
+
+      async function step_3_create_answer() {
+        connection.onicecandidate = (event) => {
+          // console.log('onicecandidate', event)
+          if (!event.candidate) {
+            document.getElementById('createdAnswer').value = JSON.stringify(connection.localDescription)
+            document.getElementById('createdAnswer').hidden = false
+          }
+        }
+
+        const answer = await connection.createAnswer()
+        await connection.setLocalDescription(answer)
+      }
+
+      async function step_4_accept_answer() {
+        const answer = JSON.parse(document.getElementById('remoteAnswer').value)
+        await connection.setRemoteDescription(answer)
+      }
+
+      async function send_text() {
+        const text = document.getElementById('text').value
+        chatTxt.value += text + "\n";
+        channel.send(text)
+      }
+    </script>
+    
+    <script>
+        /*
+            <select id="camera-select"></select>
+        */
+        const cameraSelect = document.getElementById('camera-select');
+        const tmp = localStorage.getItem("camOpt");
+        let camOpt = tmp ? JSON.parse(tmp) : null;
+        
+        navigator.mediaDevices.enumerateDevices()
+        .then(devices => {
+          const videoDevices = devices.filter(device => device.kind === 'videoinput');
+          videoDevices.forEach(device => {
+            const option = document.createElement('option');
+            option.value = device.deviceId;
+            option.text = device.label || `Camera ${cameraSelect.options.length + 1}`;
+            option.selected = camOpt ? (camOpt.video.deviceId == option.value) : false;
+            cameraSelect.appendChild(option);
+          });
+        })
+        .catch(error => console.error(error));
+        
+        cameraSelect.addEventListener("change", (evt)=>{
+            
+            const selectedCameraId = cameraSelect.value;
+            camOpt = { video: { deviceId: selectedCameraId } }
+            localStorage.setItem("camOpt", JSON.stringify(camOpt));
+        })
+    </script>
+    </body>
+</html>
