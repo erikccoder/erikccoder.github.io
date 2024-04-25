@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+       <script src="https://unpkg.com/@open-ayame/ayame-web-sdk@2022.1.0/dist/ayame.min.js"></script>
+
+</head>
+<body>
+<button>Start</button>
+<script>
+  const conn = Ayame.connection('http://ip172-18-0-44-coktf18l2o9000d4cnog-3443.direct.labs.play-with-docker.com/');
+  conn.options.video.direction = 'sendonly';
+  conn.options.audio.direction = 'sendonly';
+  const startConn = async () => {
+      const mediaStream = await navigator.mediaDevices.getUserMedia({audio: true, video: true});
+      await conn.connect(mediaStream);
+      conn.on('disconnect', (e) => console.log(e));
+      conn.on('addstream', (e) => {
+          document.querySelector('#remote-video').srcObject = e.stream;
+      });
+      document.querySelector('#local-video').srcObject = mediaStream;
+  };
+  document.querySelector('button').addEventListener(
+    "click",
+    ()=>startConn()
+  )
+</script>
+</body>
+</html>
