@@ -1,31 +1,73 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>JS Bin</title>
-       <script src="https://unpkg.com/@open-ayame/ayame-web-sdk@2022.1.0/dist/ayame.min.js"></script>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>erikccoder webrtc demo</title>
+        <script src="https://unpkg.com/@open-ayame/ayame-web-sdk@2022.1.0/dist/ayame.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.7.0/qs.min.js"></script>
+        <script src="https://riversun.github.io/jsframe/jsframe.js"></script>
+    </head>
+    <body>
+        <video id="local-video" autoplay></video>
+        <video id="remote-video" autoplay></video>
+        <button>Start</button>
+        <script>
+            (async () => {
 
-</head>
-<body>
-<button>Start</button>
-<script>
-  const conn = Ayame.connection('ws://ip172-18-0-44-coktf18l2o9000d4cnog-3443.direct.labs.play-with-docker.com/');
-  conn.options.video.direction = 'sendonly';
-  conn.options.audio.direction = 'sendonly';
-  const startConn = async () => {
-      const mediaStream = await navigator.mediaDevices.getUserMedia({audio: true, video: true});
-      await conn.connect(mediaStream);
-      conn.on('disconnect', (e) => console.log(e));
-      conn.on('addstream', (e) => {
-          document.querySelector('#remote-video').srcObject = e.stream;
-      });
-      document.querySelector('#local-video').srcObject = mediaStream;
-  };
-  document.querySelector('button').addEventListener(
-    "click",
-    ()=>startConn()
-  )
-</script>
-</body>
+				const jsFrame = new JSFrame();
+				jsFrame.showToast({
+					html: 'Parsing Options',
+					align: 'top',
+					duration: 2000
+				});
+				const qs = window.Qs;
+				if (window.location.search.length < 0) {
+					return jsFrame.showToast({
+						html: 'No Options Found!',
+						align: 'top',
+						duration: 99999999
+					});
+				}
+				const params = qs.parse(window.location.search.substr(1));
+				const {
+					ayameUrl,
+					roomId
+				} = params;
+
+				if (!ayameUrl) {
+					return jsFrame.showToast({
+						html: 'No ayameUrl Found!',
+						align: 'top',
+						duration: 99999999
+					});
+				}
+				
+
+
+				const conn = Ayame.connection(ayameUrl, (roomId||"rb-room"));
+				conn.options.video.direction = 'sendonly';
+				conn.options.audio.direction = 'sendonly';
+				const startConn = async () => {
+					const mediaStream = await navigator.mediaDevices.getUserMedia({
+						audio: true,
+						video: true
+					});
+					document.querySelector('#local-video').srcObject = mediaStream;
+					await conn.connect(mediaStream);
+					conn.on('disconnect', (e) => console.log(e));
+					conn.on('addstream', (e) => {
+						console.log("addstream", e)
+						document.querySelector('#remote-video').srcObject = e.stream;
+					});
+
+				};
+				document.querySelector('button').addEventListener(
+					"click",
+					() => startConn()
+				)
+
+			})()
+        </script>
+    </body>
 </html>
