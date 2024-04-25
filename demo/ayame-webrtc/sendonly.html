@@ -10,7 +10,7 @@
 <body>
 <button>Start</button>
 <script>
-  const conn = Ayame.connection('http://ip172-18-0-44-coktf18l2o9000d4cnog-3443.direct.labs.play-with-docker.com/');
+  const conn = Ayame.connection('ws://ip172-18-0-44-coktf18l2o9000d4cnog-3443.direct.labs.play-with-docker.com/');
   conn.options.video.direction = 'sendonly';
   conn.options.audio.direction = 'sendonly';
   const startConn = async () => {
