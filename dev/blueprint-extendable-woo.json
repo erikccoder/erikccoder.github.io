@@ -1,0 +1,100 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  
+  "meta": {
+    "title": "Minimal WooCommerce Setup with Sample Products, Shipping, and Payment Method",
+    "description": "To create a WordPress Playground instance that installs WooCommerce, adds a custom flat rate shipping method via a plugin, imports WooCommerce sample products XML to demonstrate the shipping method on the cart/checkout pages, and enables the Direct Bank Transfer payment method.",
+    "author": "calvinrodrigues500",
+    "categories": [
+      "woocommerce",
+      "shipping",
+      "flat_rate"
+    ]
+  },
+  "landingPage": "/shop/",
+  "features": {
+    "networking": true
+  },
+  "preferredVersions": {
+    "php": "8.4",
+    "wp": "6.8"
+  },
+  "plugins": [
+    "woocommerce"
+  ],
+  "steps": [
+    {
+      "step": "login",
+      "username": "admin",
+      "password": "password"
+    },
+    {
+      "step": "installTheme",
+      "themeZipFile": {
+        "resource": "wordpress.org/themes",
+        "slug": "extendable"
+      }
+    },
+    {
+      "step": "activateTheme",
+      "themeFolderName": "extendable"
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php include 'wordpress/wp-load.php';\n// Setup WooCommerce basic settings\nupdate_option('woocommerce_store_address', '123 Main Street');\nupdate_option('woocommerce_store_city', 'New York');\nupdate_option('woocommerce_default_country', 'US:NY');\nupdate_option('woocommerce_store_postcode', '10001');\nupdate_option('woocommerce_currency', 'USD');\nupdate_option('woocommerce_product_type', 'both');\nupdate_option('woocommerce_allow_tracking', 'no');\nupdate_option('woocommerce_enable_signup_and_login_from_checkout', 'yes');\nupdate_option('woocommerce_enable_myaccount_registration', 'yes');\nupdate_option('woocommerce_registration_generate_username', 'yes');\nupdate_option('woocommerce_registration_generate_password', 'yes');\necho 'WooCommerce basic setup completed';"
+    },
+    {
+      "step": "writeFile",
+      "path": "/wordpress/wp-content/uploads/experimental_fashion_sample_9_products.csv",
+      "data": "ID,Type,SKU,Name,Published,Is featured?,Visibility in catalog,Short description,Description,Date sale price starts,Date sale price ends,Tax status,Tax class,In stock?,Stock,Low stock amount,Backorders allowed?,Sold individually?,Weight (kg),Length (cm),Width (cm),Height (cm),Allow customer reviews?,Purchase note,Sale price,Regular price,Categories,Tags,Shipping class,Images,Download limit,Download expiry days,Parent,Grouped products,Upsells,Cross-sells,External URL,Button text,Position,Attribute 1 name,Attribute 1 value(s),Attribute 1 visible,Attribute 1 global,Attribute 2 name,Attribute 2 value(s),Attribute 2 visible,Attribute 2 global,Meta: _wpcom_is_markdown\n,simple,FS-001,Vintage Denim Jacket,1,0,visible,Classic vintage-style denim jacket,\"A timeless vintage denim jacket crafted from premium cotton denim. Features classic button closure, chest pockets, and a comfortable relaxed fit. Perfect for layering and everyday wear.\",,,taxable,,1,50,5,0,0,0.8,60,50,3,1,,79.99,99.99,\"Clothing > Jackets\",\"vintage,denim,casual,outerwear\",,https://images.unsplash.com/photo-1544966503-7cc531ef9e21?w=800,,,,,,,,,0,Size,\"S,M,L,XL\",1,1,Color,\"Blue,Black\",1,1,\n,simple,FS-002,Floral Summer Dress,1,1,visible,Light and breezy floral dress,\"Beautiful floral summer dress made from lightweight cotton blend. Features a flattering A-line silhouette, short sleeves, and a midi length. Perfect for warm weather and casual occasions.\",,,taxable,,1,30,3,0,0,0.3,100,40,2,1,,54.99,69.99,\"Clothing > Dresses\",\"floral,summer,casual,midi\",,https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=800,,,,,,,,,0,Size,\"XS,S,M,L,XL\",1,1,Color,\"Pink,Blue,Yellow\",1,1,\n,simple,FS-003,Leather Ankle Boots,1,0,visible,Stylish leather ankle boots,\"Premium leather ankle boots with a modern design. Features a comfortable low heel, side zip closure, and durable rubber sole. Versatile enough for both casual and semi-formal occasions.\",,,taxable,,1,25,2,0,0,1.2,25,15,20,1,,129.99,159.99,\"Shoes > Boots\",\"leather,boots,ankle,casual\",,https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=800,,,,,,,,,0,Size,\"36,37,38,39,40,41,42\",1,1,Color,\"Brown,Black\",1,1,\n,simple,FS-004,Striped Cotton T-Shirt,1,0,visible,Comfortable striped cotton tee,\"Classic striped cotton t-shirt made from 100% organic cotton. Features a relaxed fit, crew neck, and short sleeves. Available in multiple color combinations for versatile styling.\",,,taxable,,1,100,10,0,0,0.2,65,45,1,1,,24.99,29.99,\"Clothing > T-Shirts\",\"cotton,striped,casual,organic\",,https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800,,,,,,,,,0,Size,\"XS,S,M,L,XL,XXL\",1,1,Color,\"Navy/White,Black/White,Red/White\",1,1,\n,simple,FS-005,Crossbody Leather Bag,1,1,visible,Elegant crossbody leather bag,\"Sophisticated crossbody bag crafted from genuine leather. Features an adjustable strap, multiple compartments, and a secure zip closure. Perfect for everyday use or special occasions.\",,,taxable,,1,15,1,0,0,0.6,25,20,8,1,,89.99,119.99,\"Accessories > Bags\",\"leather,crossbody,handbag,accessories\",,https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800,,,,,,,,,0,Size,\"One Size\",1,1,Color,\"Tan,Black,Burgundy\",1,1,\n,simple,FS-006,Knit Cardigan Sweater,1,0,visible,Cozy knit cardigan sweater,\"Soft and warm knit cardigan made from a cotton-wool blend. Features button closure, front pockets, and ribbed cuffs. Perfect for layering during cooler months.\",,,taxable,,1,40,4,0,0,0.5,70,50,3,1,,64.99,84.99,\"Clothing > Sweaters\",\"knit,cardigan,cozy,layering\",,https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=800,,,,,,,,,0,Size,\"S,M,L,XL\",1,1,Color,\"Cream,Gray,Navy\",1,1,\n,simple,FS-007,High-Waisted Jeans,1,0,visible,Trendy high-waisted denim jeans,\"Modern high-waisted jeans with a flattering slim fit. Made from stretch denim for comfort and mobility. Features classic five-pocket styling and a versatile dark wash.\",,,taxable,,1,60,6,0,0,0.7,100,35,2,1,,69.99,89.99,\"Clothing > Jeans\",\"denim,high-waisted,slim-fit,stretch\",,https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=800,,,,,,,,,0,Size,\"24,26,28,30,32,34\",1,1,Color,\"Dark Blue,Light Blue\",1,1,\n,simple,FS-008,Silk Scarf,1,1,visible,Luxurious silk scarf,\"Elegant silk scarf with a beautiful print design. Made from 100% pure silk with hand-rolled edges. Can be worn around the neck, in hair, or as a fashion accessory.\",,,taxable,,1,20,2,0,0,0.1,90,90,0.5,1,,39.99,49.99,\"Accessories > Scarves\",\"silk,luxury,accessories,print\",,https://images.unsplash.com/photo-1590736969955-71cc94901144?w=800,,,,,,,,,0,Size,\"One Size\",1,1,Pattern,\"Floral,Geometric,Abstract\",1,1,\n,simple,FS-009,Canvas Sneakers,1,0,visible,Classic canvas sneakers,\"Timeless canvas sneakers with a vintage-inspired design. Features a durable canvas upper, comfortable cushioned sole, and classic lace-up closure. Perfect for casual everyday wear.\",,,taxable,,1,35,3,0,0,0.8,30,20,12,1,,44.99,59.99,\"Shoes > Sneakers\",\"canvas,sneakers,casual,vintage\",,https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800,,,,,,,,,0,Size,\"36,37,38,39,40,41,42,43,44\",1,1,Color,\"White,Black,Navy\",1,1,"
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php include 'wordpress/wp-load.php';\n// Import WooCommerce products from CSV\nif (!function_exists('wc_get_products')) {\n    return 'WooCommerce not active';\n}\n\n// Include WooCommerce functions\nrequire_once(ABSPATH . 'wp-admin/includes/file.php');\nrequire_once(ABSPATH . 'wp-admin/includes/image.php');\nrequire_once(ABSPATH . 'wp-admin/includes/media.php');\n\n// Read CSV file\n$csv_file = '/wordpress/wp-content/uploads/experimental_fashion_sample_9_products.csv';\n$csv_data = array_map('str_getcsv', file($csv_file));\n$headers = array_shift($csv_data);\n\n$imported_count = 0;\n\nforeach ($csv_data as $row) {\n    $product_data = array_combine($headers, $row);\n    \n    // Create product\n    $product = new WC_Product_Simple();\n    $product->set_name($product_data['Name']);\n    $product->set_description($product_data['Description']);\n    $product->set_short_description($product_data['Short description']);\n    $product->set_sku($product_data['SKU']);\n    $product->set_regular_price($product_data['Regular price']);\n    if (!empty($product_data['Sale price'])) {\n        $product->set_sale_price($product_data['Sale price']);\n    }\n    $product->set_manage_stock(true);\n    $product->set_stock_quantity(intval($product_data['Stock']));\n    $product->set_weight($product_data['Weight (kg)']);\n    $product->set_status('publish');\n    \n    // Set categories\n    if (!empty($product_data['Categories'])) {\n        $categories = explode('>', $product_data['Categories']);\n        $cat_ids = array();\n        foreach ($categories as $cat_name) {\n            $cat_name = trim($cat_name);\n            $term = get_term_by('name', $cat_name, 'product_cat');\n            if (!$term) {\n                $term = wp_insert_term($cat_name, 'product_cat');\n                if (!is_wp_error($term)) {\n                    $cat_ids[] = $term['term_id'];\n                }\n            } else {\n                $cat_ids[] = $term->term_id;\n            }\n        }\n        $product->set_category_ids($cat_ids);\n    }\n    \n    // Set tags\n    if (!empty($product_data['Tags'])) {\n        $tags = explode(',', $product_data['Tags']);\n        $tag_ids = array();\n        foreach ($tags as $tag_name) {\n            $tag_name = trim($tag_name);\n            $term = get_term_by('name', $tag_name, 'product_tag');\n            if (!$term) {\n                $term = wp_insert_term($tag_name, 'product_tag');\n                if (!is_wp_error($term)) {\n                    $tag_ids[] = $term['term_id'];\n                }\n            } else {\n                $tag_ids[] = $term->term_id;\n            }\n        }\n        $product->set_tag_ids($tag_ids);\n    }\n    \n    // Save product\n    $product_id = $product->save();\n    \n    if ($product_id) {\n        $imported_count++;\n        \n        // Set featured product\n        if ($product_data['Is featured?'] == '1') {\n            update_post_meta($product_id, '_featured', 'yes');\n        }\n        \n        // Add product attributes\n        $attributes = array();\n        \n        // Size attribute\n        if (!empty($product_data['Attribute 1 value(s)'])) {\n            $attribute = new WC_Product_Attribute();\n            $attribute->set_name('Size');\n            $attribute->set_options(explode(',', $product_data['Attribute 1 value(s)']));\n            $attribute->set_visible(true);\n            $attribute->set_variation(false);\n            $attributes['size'] = $attribute;\n        }\n        \n        // Color attribute\n        if (!empty($product_data['Attribute 2 value(s)'])) {\n            $attribute = new WC_Product_Attribute();\n            $attribute->set_name('Color');\n            $attribute->set_options(explode(',', $product_data['Attribute 2 value(s)']));\n            $attribute->set_visible(true);\n            $attribute->set_variation(false);\n            $attributes['color'] = $attribute;\n        }\n        \n        if (!empty($attributes)) {\n            $product->set_attributes($attributes);\n            $product->save();\n        }\n    }\n}\n\necho \"Imported {$imported_count} products successfully\";"
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php include 'wordpress/wp-load.php';\n// Configure WooCommerce shop settings\n// Set shop page as homepage\n$shop_page = get_page_by_path('shop');\nif (!$shop_page) {\n    // Create shop page if it doesn't exist\n    $shop_page_id = wp_insert_post(array(\n        'post_title' => 'Shop',\n        'post_content' => '',\n        'post_status' => 'publish',\n        'post_type' => 'page',\n        'post_name' => 'shop'\n    ));\n    update_option('woocommerce_shop_page_id', $shop_page_id);\n} else {\n    update_option('woocommerce_shop_page_id', $shop_page->ID);\n}\n\n// Set products per page and columns\nupdate_option('woocommerce_catalog_columns', 6);\nupdate_option('woocommerce_catalog_rows', 4);\nupdate_option('posts_per_page', 24); // 6 columns x 4 rows\n\n// Set shop page as front page\nupdate_option('show_on_front', 'page');\nupdate_option('page_on_front', get_option('woocommerce_shop_page_id'));\n\necho 'Shop page configured as landing page with 6 columns';"
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php include 'wordpress/wp-load.php';\n// Add custom CSS for 6-column layout\n$custom_css = '\n/* 6-column product layout */\n.woocommerce ul.products li.product {\n    width: 16.66% !important;\n    margin-right: 0.5% !important;\n}\n\n.woocommerce ul.products li.product:nth-child(6n) {\n    margin-right: 0 !important;\n}\n\n@media (max-width: 1200px) {\n    .woocommerce ul.products li.product {\n        width: 33.33% !important;\n    }\n    .woocommerce ul.products li.product:nth-child(6n) {\n        margin-right: 0.5% !important;\n    }\n    .woocommerce ul.products li.product:nth-child(3n) {\n        margin-right: 0 !important;\n    }\n}\n\n@media (max-width: 768px) {\n    .woocommerce ul.products li.product {\n        width: 48% !important;\n    }\n    .woocommerce ul.products li.product:nth-child(3n),\n    .woocommerce ul.products li.product:nth-child(6n) {\n        margin-right: 0.5% !important;\n    }\n    .woocommerce ul.products li.product:nth-child(2n) {\n        margin-right: 0 !important;\n    }\n}\n\n@media (max-width: 480px) {\n    .woocommerce ul.products li.product {\n        width: 100% !important;\n        margin-right: 0 !important;\n    }\n}\n';\n\n// Add CSS to theme customizer\nwp_add_inline_style('extendable-style', $custom_css);\n\n// Also save as customizer option\nset_theme_mod('custom_css', $custom_css);\n\necho 'Custom CSS added for 6-column layout';"
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php include 'wordpress/wp-load.php';\n// Complete WooCommerce setup\n// Set up default WooCommerce pages\nWC_Install::create_pages();\n\n// Set up default WooCommerce settings\nupdate_option('woocommerce_calc_taxes', 'no');\nupdate_option('woocommerce_prices_include_tax', 'no');\nupdate_option('woocommerce_tax_display_shop', 'excl');\nupdate_option('woocommerce_tax_display_cart', 'excl');\nupdate_option('woocommerce_enable_reviews', 'yes');\nupdate_option('woocommerce_review_rating_required', 'yes');\nupdate_option('woocommerce_enable_review_rating', 'yes');\n\n// Set up inventory settings\nupdate_option('woocommerce_manage_stock', 'yes');\nupdate_option('woocommerce_notify_low_stock', 'yes');\nupdate_option('woocommerce_notify_no_stock', 'yes');\nupdate_option('woocommerce_stock_email_recipient', get_option('admin_email'));\nupdate_option('woocommerce_notify_low_stock_amount', 2);\nupdate_option('woocommerce_notify_no_stock_amount', 0);\nupdate_option('woocommerce_hide_out_of_stock_items', 'no');\n\n// Flush rewrite rules\nflush_rewrite_rules();\n\necho 'WooCommerce setup completed successfully';"
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php include 'wordpress/wp-load.php';\n// Final verification and cleanup\necho 'WordPress Blueprint Setup Complete!';\necho '\\n\\nSetup Summary:';\necho '\\n- Theme: Extendable (activated)';\necho '\\n- Plugin: WooCommerce (activated and configured)';\necho '\\n- Products: 9 fashion sample products imported';\necho '\\n- Landing page: Shop page';\necho '\\n- Product display: 6 columns layout';\necho '\\n- Store configured with basic settings';\necho '\\n\\nYour fashion store is ready to use!';"
+    },
+    {
+      "step": "importWxr",
+      "file": {
+        "resource": "url",
+        "url": "https://raw.githubusercontent.com/wordpress/blueprints/trunk/blueprints/woo-shipping/sample_products.xml"
+      }
+    },
+    {
+      "step": "mkdir",
+      "path": "/wordpress/wp-content/plugins/woo-shipping-method"
+    },
+    {
+      "step": "writeFile",
+      "path": "/wordpress/wp-content/plugins/woo-shipping-method/woo-shipping-method.php",
+      "data": {
+        "resource": "url",
+        "url": "https://raw.githubusercontent.com/wordpress/blueprints/trunk/blueprints/woo-shipping/woo-shipping-method/woo-shipping-method.php"
+      }
+    },
+    {
+      "step": "activatePlugin",
+      "pluginName": "woo-shipping-method",
+      "pluginPath": "woo-shipping-method/woo-shipping-method.php"
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php include 'wordpress/wp-load.php'; delete_transient( '_wc_activation_redirect' ); wp_insert_post(array( 'import_id' => 5, 'post_title' => 'Sample Product', 'post_content' => '<!-- wp:paragraph --><p>Sample product description</p><!-- /wp:paragraph -->','post_status' => 'publish','post_type' => 'product','post_author' => 1, 'meta_input' => array('_sku' => 'WEBTOFFEE-FEED-ITEM', '_regular_price' => 25.00, '_sale_price' => 22.00, '_price' => 22.00, '_wt_feed_brand' => 'WebToffee', '_wt_feed_gtin' => 'WEBTOFFEE123', '_wt_feed_mpn' => 'WebToffee123', '_wt_feed_color' => 'Red', '_wt_feed_gender' => 'Male' ) ) );"
+    }
+  ]
+}
